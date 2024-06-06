@@ -10,17 +10,6 @@ import org.openqa.selenium.WebDriver;
 
 public class CommonUtil {
 
-	//  takeScreenShot(WebDriver driver,String folderScreenShot, String testCaseId)使い方
-	//  テスト結果が”成功”以外の時にスクリーンショット取得
-	//	@AfterMethod(alwaysRun = true)
-	//	public void afterCheckItemA(ITestResult result) {
-	//		if(result.getStatus() != ITestResult.SUCCESS) {
-	//			CommonUtil.takeScreenShot(driver, ".\\result", result.getMethod().getMethodName());
-	//		}
-	//		driver.quit();
-	//		System.out.println("site closed1");
-	//	}
-
 	/**
 	 * take screenshot
 	 * @param driver
@@ -56,8 +45,5 @@ public class CommonUtil {
 		} catch (IOException e) {
 			System.out.println(e);
 		}
-		//		System.out.println(scrFile);
-		//		System.out.println(fileName);
 	}
-
 }
