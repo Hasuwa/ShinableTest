@@ -18,9 +18,10 @@ public class TestBase {
 	WebDriverWait wait;
 	WebElement inputField;
 
-	static final String SHINABLE_PATH = "http://localhost:8080/";
+	static final String SHINABLE_PATH = "http://localhost:8081/login";
 	static final String SHINABLE_DEPLOYED_PATH = "http://localhost:8080/HRMS-0.0.1-SNAPSHOT/";
 	static final String SHINABLE_CLOUD_PATH = "https://shinable.azurewebsites.net/login";
+	static final String EMPLOYEE_NAME = "日本　プロ太";
 
 	/**
 	 * EdgeDriverのパスを指定
@@ -113,7 +114,7 @@ public class TestBase {
 		// input employee num
 		input("//*[@id=\"number\"]", employeeNum);
 		// input name
-		input("//*[@id=\"fullName\"]", "日本　プロ太");
+		input("//*[@id=\"fullName\"]", EMPLOYEE_NAME);
 		// input mailaddress
 		input("//*[@id=\"mailAddress\"]", mailaddress);
 
@@ -139,6 +140,15 @@ public class TestBase {
 		//input password
 		input("//*[@id=\"password\"]", "P@ssw0rd");
 	}
+	
+	/**
+	 * assert text of page title
+	 * @param page title
+	 */
+	public void assertPageTitle(String title) {
+		assertText("/html/body/div[2]/h1", title);
+		ExpectedConditions.titleIs(title);
+	}
 
 	/**
 	 * assert added employee info
@@ -147,7 +157,7 @@ public class TestBase {
 	 */
 	public void assertEmployeeInfo(String employeeNum, String mailaddress) {
 		assertText("/html/body/div[2]/div[3]/div[2]/table/tbody/tr[1]/td", employeeNum);
-		assertText("/html/body/div[2]/div[3]/div[2]/table/tbody/tr[2]/td", "日本　プロ太");
+		assertText("/html/body/div[2]/div[3]/div[2]/table/tbody/tr[2]/td", EMPLOYEE_NAME);
 		assertText("/html/body/div[2]/div[3]/div[2]/table/tbody/tr[3]/td", mailaddress);
 		assertText("/html/body/div[2]/div[3]/div[2]/table/tbody/tr[8]/td", "AS0");
 		assertText("/html/body/div[2]/div[3]/div[2]/table/tbody/tr[9]/td", "ICT");
