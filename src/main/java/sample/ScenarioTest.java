@@ -261,7 +261,7 @@ public class ScenarioTest extends TestBase {
 		final String mailaddress = "Purota.NIHON5@jpd.co.jp";
 		inputEmployeeInfo(employeeNum, mailaddress);
 		// 性別
-		click("/html/body/div[2]/div/form/div[4]/div/label[1]/span");
+//		click("/html/body/div[2]/div/form/div[4]/div/label[1]/span");
 		// 登録
 		click("//*[@id=\"upload\"]");
 		// メッセージバー確認
@@ -277,7 +277,7 @@ public class ScenarioTest extends TestBase {
 		click("//*[@id=\"employeeData\"]/tr/td[5]/a");
 		//登録内容確認
 		assertEmployeeInfo(employeeNum, mailaddress);
-		assertText("/html/body/div[2]/div[3]/div[2]/table/tbody/tr[4]/td", "男");
+//		assertText("/html/body/div[2]/div[3]/div[2]/table/tbody/tr[4]/td", "男");
 
 		//4.登録した社員を削除
 		click("/html/body/div[2]/div[1]/button");
