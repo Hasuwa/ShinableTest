@@ -19,7 +19,7 @@ public class TestBase {
 	WebElement inputField;
 
 	static final String SHINABLE_PATH = "http://localhost:8081/login";
-	static final String SHINABLE_DEPLOYED_PATH = "http://localhost:8080/HRMS-0.0.1-SNAPSHOT/";
+	static final String SHINABLE_DEPLOYED_PATH = "http://localhost:8000/HRMS-0.0.1-SNAPSHOT/";
 	static final String SHINABLE_CLOUD_PATH = "https://shinable.azurewebsites.net/login";
 	static final String EMPLOYEE_NAME = "日本　プロ太";
 
@@ -36,7 +36,7 @@ public class TestBase {
 	 */
 	public void siteOpen() {
 		driver = new EdgeDriver();
-		driver.get(SHINABLE_PATH);
+		driver.get(SHINABLE_DEPLOYED_PATH);
 		driver.manage().window().maximize();
 	}
 
