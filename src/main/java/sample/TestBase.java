@@ -7,7 +7,7 @@ import java.time.Duration;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -18,8 +18,11 @@ public class TestBase {
 	WebDriverWait wait;
 	WebElement inputField;
 
+	//eclipseでアプリ実行
 	static final String SHINABLE_PATH = "http://localhost:8081/login";
-	static final String SHINABLE_DEPLOYED_PATH = "http://localhost:8000/HRMS-0.0.1-SNAPSHOT/";
+	//Tomcatにデプロイ
+	static final String SHINABLE_DEPLOYED_PATH = "http://localhost:8000/login";
+	//Azure上にデプロイ
 	static final String SHINABLE_CLOUD_PATH = "https://shinable.azurewebsites.net/login";
 	static final String EMPLOYEE_NAME = "日本　プロ太";
 
@@ -30,12 +33,21 @@ public class TestBase {
 		final String EDGE_DRIVER_PATH = "edgeDriver/msedgedriver.exe";
 		System.setProperty("webdriver.edge.driver", EDGE_DRIVER_PATH);
 	}
+	
+//	/**
+//	 * ChromeDriverのパスを指定
+//	 */
+//	public void setPropatyPath() {
+//		final String CHOROME_DRIVER_PATH = "chromeDriver/chromedriver.exe";
+//		System.setProperty("webdriver.chrome.driver", CHOROME_DRIVER_PATH);
+//	}
 
 	/**
 	 * SHINABLEを開く
 	 */
 	public void siteOpen() {
-		driver = new EdgeDriver();
+//		driver = new EdgeDriver();
+		driver = new ChromeDriver();
 		driver.get(SHINABLE_DEPLOYED_PATH);
 		driver.manage().window().maximize();
 	}
