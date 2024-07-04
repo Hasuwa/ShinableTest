@@ -7,7 +7,7 @@ import java.time.Duration;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -46,8 +46,8 @@ public class TestBase {
 	 * SHINABLEを開く
 	 */
 	public void siteOpen() {
-//		driver = new EdgeDriver();
-		driver = new ChromeDriver();
+		driver = new EdgeDriver();
+//		driver = new ChromeDriver();
 		driver.get(SHINABLE_DEPLOYED_PATH);
 		driver.manage().window().maximize();
 	}
