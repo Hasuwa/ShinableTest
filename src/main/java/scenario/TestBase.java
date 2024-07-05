@@ -8,10 +8,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class TestBase {
 
@@ -32,8 +31,15 @@ public class TestBase {
 	 * SHINABLEを開く
 	 */
 	public void siteOpen() {
-		WebDriverManager.edgedriver().setup();
-		driver = new EdgeDriver();
+//		WebDriverManager.edgedriver().setup();
+		
+		// Chrome WebDriver options
+        EdgeOptions options = new EdgeOptions();
+        options.addArguments("--headless");
+        options.addArguments("--no-sandbox");
+
+        // Initialize Chrome WebDriver        
+		driver = new EdgeDriver(options);
 		driver.get(SHINABLE_DEPLOYED_PATH);
 		driver.manage().window().maximize();
 	}
