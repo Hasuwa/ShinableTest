@@ -33,12 +33,12 @@ public class TestBase {
 //		WebDriverManager.edgedriver().setup();
 		
 		// WebDriver options
-//        EdgeOptions options = new EdgeOptions();
-//        options.addArguments("--headless");
-//        options.addArguments("--no-sandbox");
-//		driver = new EdgeDriver(options);
+        EdgeOptions options = new EdgeOptions();
+        options.addArguments("disable-dev-shm-usage");
+       options.addArguments("--no-sandbox");
+		driver = new EdgeDriver(options);
 		
-		driver = new ChromeDriver();
+	//	driver = new ChromeDriver();
 		driver.get(SHINABLE_DEPLOYED_PATH);
 		driver.manage().window().maximize();
 	}
