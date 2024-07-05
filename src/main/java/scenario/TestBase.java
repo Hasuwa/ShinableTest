@@ -12,6 +12,8 @@ import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
+
 public class TestBase {
 
 	WebDriver driver;
@@ -31,14 +33,13 @@ public class TestBase {
 	 * SHINABLEを開く
 	 */
 	public void siteOpen() {
-//		WebDriverManager.edgedriver().setup();
+		WebDriverManager.edgedriver().setup();
 		
-		// Chrome WebDriver options
+		// WebDriver options
         EdgeOptions options = new EdgeOptions();
         options.addArguments("--headless");
         options.addArguments("--no-sandbox");
 
-        // Initialize Chrome WebDriver        
 		driver = new EdgeDriver(options);
 		driver.get(SHINABLE_DEPLOYED_PATH);
 		driver.manage().window().maximize();
