@@ -7,12 +7,9 @@ import java.time.Duration;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.edge.EdgeDriver;
-import org.openqa.selenium.edge.EdgeOptions;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class TestBase {
 
@@ -33,14 +30,15 @@ public class TestBase {
 	 * SHINABLEを開く
 	 */
 	public void siteOpen() {
-		WebDriverManager.edgedriver().setup();
+//		WebDriverManager.edgedriver().setup();
 		
 		// WebDriver options
-        EdgeOptions options = new EdgeOptions();
-        options.addArguments("--headless");
-        options.addArguments("--no-sandbox");
-
-		driver = new EdgeDriver(options);
+//        EdgeOptions options = new EdgeOptions();
+//        options.addArguments("--headless");
+//        options.addArguments("--no-sandbox");
+//		driver = new EdgeDriver(options);
+		
+		driver = new ChromeDriver();
 		driver.get(SHINABLE_DEPLOYED_PATH);
 		driver.manage().window().maximize();
 	}
