@@ -7,7 +7,7 @@ import java.time.Duration;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -29,25 +29,25 @@ public class TestBase {
 	/**
 	 * EdgeDriverのパスを指定
 	 */
-//	public void setPropatyPath() {
-//		final String EDGE_DRIVER_PATH = "edgeDriver/msedgedriver.exe";
-//		System.setProperty("webdriver.edge.driver", EDGE_DRIVER_PATH);
-//	}
+	public void setPropatyPath() {
+		final String EDGE_DRIVER_PATH = "edgeDriver/msedgedriver.exe";
+		System.setProperty("webdriver.edge.driver", EDGE_DRIVER_PATH);
+	}
 	
 	/**
 	 * ChromeDriverのパスを指定
 	 */
-	public void setPropatyPath() {
-		final String CHOROME_DRIVER_PATH = "chromeDriver/chromedriver.exe";
-		System.setProperty("webdriver.chrome.driver", CHOROME_DRIVER_PATH);
-	}
+//	public void setPropatyPath() {
+//		final String CHOROME_DRIVER_PATH = "chromeDriver/chromedriver.exe";
+//		System.setProperty("webdriver.chrome.driver", CHOROME_DRIVER_PATH);
+//	}
 
 	/**
 	 * SHINABLEを開く
 	 */
 	public void siteOpen() {
-//		driver = new EdgeDriver();
-		driver = new ChromeDriver();
+		driver = new EdgeDriver();
+//		driver = new ChromeDriver();
 		driver.get(SHINABLE_DEPLOYED_PATH);
 		driver.manage().window().maximize();
 	}
