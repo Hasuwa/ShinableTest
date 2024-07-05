@@ -11,6 +11,8 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
+
 public class TestBase {
 
 	WebDriver driver;
@@ -30,6 +32,7 @@ public class TestBase {
 	 * SHINABLEを開く
 	 */
 	public void siteOpen() {
+		WebDriverManager.edgedriver().setup();
 		driver = new EdgeDriver();
 		driver.get(SHINABLE_DEPLOYED_PATH);
 		driver.manage().window().maximize();
