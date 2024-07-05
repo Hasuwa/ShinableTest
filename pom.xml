@@ -59,7 +59,7 @@
 				<configuration>
 					<suiteXmlFiles>
 						<suiteXmlFile>
-							src\testng\sample.xml
+							src\testng\scenario.xml
 						</suiteXmlFile>
 					</suiteXmlFiles>
 				</configuration>

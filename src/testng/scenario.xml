@@ -8,7 +8,7 @@
 			</run>
 		</groups>
 		<classes>
-			<class name="sample.ScenarioTest" />
+			<class name="scenario.ScenarioTest" />
 		</classes>
 	</test>
 </suite>

@@ -1,4 +1,4 @@
-package sample;
+package scenario;
 
 import static org.testng.Assert.*;
 

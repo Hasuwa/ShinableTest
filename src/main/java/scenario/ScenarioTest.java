@@ -1,4 +1,4 @@
-package sample;
+package scenario;
 
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
