@@ -37,8 +37,15 @@ public class TestBase {
 //       options.addArguments("disable-dev-shm-usage");
 //       options.addArguments("--no-sandbox");
 //		driver = new EdgeDriver(options);
-		
-		driver = new ChromeDriver();
+
+		        // Chrome WebDriver options
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--headless");
+        options.addArguments("--no-sandbox");
+
+        // Initialize Chrome WebDriver
+       		driver = new ChromeDriver(options);
+		//driver = new ChromeDriver();
 		driver.get(SHINABLE_CLOUD_PATH);
 		driver.manage().window().maximize();
 	}
