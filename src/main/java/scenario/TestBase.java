@@ -33,8 +33,8 @@ public class TestBase {
 	public void siteOpen() {
 		// Chrome WebDriver options
         ChromeOptions options = new ChromeOptions();
-//        options.addArguments("--headless");
-//        options.addArguments("--no-sandbox");
+        options.addArguments("--headless");
+        options.addArguments("--no-sandbox");
 
         // Initialize Chrome WebDriver
        		driver = new ChromeDriver(options);
