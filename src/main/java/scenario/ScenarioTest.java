@@ -9,7 +9,8 @@ import utility.CommonUtil;
 
 public class ScenarioTest extends TestBase {
 
-	static final String SEARCH_BUTTON_XPATH = "/html/body/header/nav/div/ul/li[2]/a";
+	static final String HEADER_XPATH = "//header";
+	static final String SEARCH_BUTTON_XPATH = HEADER_XPATH + "//*[text()=\"従業員情報検索\"]";
 
 	@BeforeMethod(alwaysRun = true)
 	public void before() {
@@ -20,8 +21,8 @@ public class ScenarioTest extends TestBase {
 	public void after(ITestResult result) {
 		if (result.getStatus() != ITestResult.SUCCESS) {
 			CommonUtil.takeScreenShot(driver, ".\\result", result.getMethod().getMethodName());
+			closeShinable();
 		}
-		closeShinable();
 	}
 
 	/**
