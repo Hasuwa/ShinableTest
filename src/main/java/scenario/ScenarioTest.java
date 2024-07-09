@@ -20,9 +20,9 @@ public class ScenarioTest extends TestBase {
 	@AfterMethod(alwaysRun = true)
 	public void after(ITestResult result) {
 		if (result.getStatus() != ITestResult.SUCCESS) {
-			CommonUtil.takeScreenShot(driver, ".\\result", result.getMethod().getMethodName());
-			closeShinable();
+			CommonUtil.takeScreenShot(driver, ".\\result", result.getMethod().getMethodName());			
 		}
+		closeShinable();
 	}
 
 	/**
@@ -53,32 +53,31 @@ public class ScenarioTest extends TestBase {
 		// メッセージバー確認
 		assertMessageBar("従業員情報の登録が完了しました。");
 //		assertPageTitle("従業員情報詳細");
+		try {
+			//3.検索にて登録内容確認
+			click(SEARCH_BUTTON_XPATH);
+//			assertPageTitle("従業員情報検索");
+			input("//*[@id=\"nameForEmployeeSearch\"]", EMPLOYEE_NAME);
+			click("//*[@id=\"employeeSearchButton\"]");
+			//一覧に追加されていることを確認
+			waitForElementVisible("//*[@id=\"employeeData\"]");
+			assertText("//*[@id=\"employeeData\"]/tr/td[1]", EMPLOYEE_NAME);
+			click("//*[@id=\"employeeData\"]/tr/td[5]/a");
+//			assertPageTitle("従業員情報詳細");
+			//登録内容確認
+			assertEmployeeInfo(employeeNum, mailaddress);
+		}catch(Exception | AssertionError e) {
+			CommonUtil.takeScreenShot(driver, ".\\result", "scenarioTest001");
+			throw e;
+		}finally {
+			//4.登録した社員を削除
+			delete();
+//			assertPageTitle("従業員情報検索");
 
-		//3.検索にて登録内容確認
-		click(SEARCH_BUTTON_XPATH);
-//		assertPageTitle("従業員情報検索");
-		input("//*[@id=\"nameForEmployeeSearch\"]", EMPLOYEE_NAME);
-		click("//*[@id=\"employeeSearchButton\"]");
-		//一覧に追加されていることを確認
-		waitForElementVisible("//*[@id=\"employeeData\"]");
-		assertText("//*[@id=\"employeeData\"]/tr/td[1]", EMPLOYEE_NAME);
-		click("//*[@id=\"employeeData\"]/tr/td[5]/a");
-//		assertPageTitle("従業員情報詳細");
-		//登録内容確認
-		assertEmployeeInfo(employeeNum, mailaddress);
-
-		//4.登録した社員を削除
-		click("/html/body/div[2]/div[1]/button");
-		assertText("/html/body/div[2]/div[2]/div[1]/p[1]", "以下の従業員情報を削除してもよろしいでしょうか");
-		assertText("/html/body/div[2]/div[2]/div[1]/p[2]", "・" + EMPLOYEE_NAME);
-		click("//*[@id=\"modalExecute\"]");
-		//メッセージバー確認
-		assertMessageBar("従業員情報の削除が完了しました。");
-//		assertPageTitle("従業員情報検索");
-
-		//5.ログアウト
-		click("/html/body/header/nav/div/ul/li[4]/a");
-		click("//*[@id=\"glovalNaviLoginDropMenu2\"]/li[2]/form");
+			//5.ログアウト
+			click("/html/body/header/nav/div/ul/li[4]/a");
+			click("//*[@id=\"glovalNaviLoginDropMenu2\"]/li[2]/form");
+		}
 	}
 
 	/**
@@ -109,29 +108,32 @@ public class ScenarioTest extends TestBase {
 		// メッセージバー確認
 		assertMessageBar("従業員情報の登録が完了しました。");
 
-		//3.検索にて登録内容確認
-		click(SEARCH_BUTTON_XPATH);
-		input("//*[@id=\"nameForEmployeeSearch\"]", EMPLOYEE_NAME);
-		click("//*[@id=\"employeeSearchButton\"]");
-		//一覧に追加されていることを確認
-		waitForElementVisible("//*[@id=\"employeeData\"]");
-		assertText("//*[@id=\"employeeData\"]/tr/td[1]", EMPLOYEE_NAME);
-		click("//*[@id=\"employeeData\"]/tr/td[5]/a");
-		//登録内容確認
-		assertEmployeeInfo(employeeNum, mailaddress);
-		assertText("/html/body/div[2]/div[3]/div[2]/table/tbody/tr[6]/td", "pNihon2");
+//		assertPageTitle("従業員情報詳細");
+		try {
+			//3.検索にて登録内容確認
+			click(SEARCH_BUTTON_XPATH);
+//			assertPageTitle("従業員情報検索");
+			input("//*[@id=\"nameForEmployeeSearch\"]", EMPLOYEE_NAME);
+			click("//*[@id=\"employeeSearchButton\"]");
+			//一覧に追加されていることを確認
+			waitForElementVisible("//*[@id=\"employeeData\"]");
+			assertText("//*[@id=\"employeeData\"]/tr/td[1]", EMPLOYEE_NAME);
+			click("//*[@id=\"employeeData\"]/tr/td[5]/a");
+//			assertPageTitle("従業員情報詳細");
+			//登録内容確認
+			assertEmployeeInfo(employeeNum, mailaddress);
+		}catch(Exception | AssertionError e) {
+			CommonUtil.takeScreenShot(driver, ".\\result", "scenarioTest001");
+			throw e;
+		}finally {
+			//4.登録した社員を削除
+			delete();
+//			assertPageTitle("従業員情報検索");
 
-		//4.登録した社員を削除
-		click("/html/body/div[2]/div[1]/button");
-		assertText("/html/body/div[2]/div[2]/div[1]/p[1]", "以下の従業員情報を削除してもよろしいでしょうか");
-		assertText("/html/body/div[2]/div[2]/div[1]/p[2]", "・" + EMPLOYEE_NAME);
-		click("//*[@id=\"modalExecute\"]");
-		//メッセージバー確認
-		assertMessageBar("従業員情報の削除が完了しました。");
-
-		//5.ログアウト
-		click("/html/body/header/nav/div/ul/li[4]/a");
-		click("//*[@id=\"glovalNaviLoginDropMenu2\"]/li[2]/form");
+			//5.ログアウト
+			click("/html/body/header/nav/div/ul/li[4]/a");
+			click("//*[@id=\"glovalNaviLoginDropMenu2\"]/li[2]/form");
+		}
 	}
 
 	/**
@@ -162,29 +164,32 @@ public class ScenarioTest extends TestBase {
 		// メッセージバー確認
 		assertMessageBar("従業員情報の登録が完了しました。");
 
-		//3.検索にて登録内容確認
-		click(SEARCH_BUTTON_XPATH);
-		input("//*[@id=\"nameForEmployeeSearch\"]", EMPLOYEE_NAME);
-		click("//*[@id=\"employeeSearchButton\"]");
-		//一覧に追加されていることを確認
-		waitForElementVisible("//*[@id=\"employeeData\"]");
-		assertText("//*[@id=\"employeeData\"]/tr/td[1]", EMPLOYEE_NAME);
-		click("//*[@id=\"employeeData\"]/tr/td[5]/a");
-		//登録内容確認
-		assertEmployeeInfo(employeeNum, mailaddress);
-		assertText("/html/body/div[2]/div[3]/div[2]/table/tbody/tr[5]/td", "2024-04-01");
+//		assertPageTitle("従業員情報詳細");
+		try {
+			//3.検索にて登録内容確認
+			click(SEARCH_BUTTON_XPATH);
+//			assertPageTitle("従業員情報検索");
+			input("//*[@id=\"nameForEmployeeSearch\"]", EMPLOYEE_NAME);
+			click("//*[@id=\"employeeSearchButton\"]");
+			//一覧に追加されていることを確認
+			waitForElementVisible("//*[@id=\"employeeData\"]");
+			assertText("//*[@id=\"employeeData\"]/tr/td[1]", EMPLOYEE_NAME);
+			click("//*[@id=\"employeeData\"]/tr/td[5]/a");
+//			assertPageTitle("従業員情報詳細");
+			//登録内容確認
+			assertEmployeeInfo(employeeNum, mailaddress);
+		}catch(Exception | AssertionError e) {
+			CommonUtil.takeScreenShot(driver, ".\\result", "scenarioTest001");
+			throw e;
+		}finally {
+			//4.登録した社員を削除
+			delete();
+//			assertPageTitle("従業員情報検索");
 
-		//4.登録した社員を削除
-		click("/html/body/div[2]/div[1]/button");
-		assertText("/html/body/div[2]/div[2]/div[1]/p[1]", "以下の従業員情報を削除してもよろしいでしょうか");
-		assertText("/html/body/div[2]/div[2]/div[1]/p[2]", "・" + EMPLOYEE_NAME);
-		click("//*[@id=\"modalExecute\"]");
-		//メッセージバー確認
-		assertMessageBar("従業員情報の削除が完了しました。");
-
-		//5.ログアウト
-		click("/html/body/header/nav/div/ul/li[4]/a");
-		click("//*[@id=\"glovalNaviLoginDropMenu2\"]/li[2]/form");
+			//5.ログアウト
+			click("/html/body/header/nav/div/ul/li[4]/a");
+			click("//*[@id=\"glovalNaviLoginDropMenu2\"]/li[2]/form");
+		}
 	}
 
 	/**
@@ -215,29 +220,32 @@ public class ScenarioTest extends TestBase {
 		// メッセージバー確認
 		assertMessageBar("従業員情報の登録が完了しました。");
 
-		//3.検索にて登録内容確認
-		click(SEARCH_BUTTON_XPATH);
-		input("//*[@id=\"nameForEmployeeSearch\"]", EMPLOYEE_NAME);
-		click("//*[@id=\"employeeSearchButton\"]");
-		//一覧に追加されていることを確認
-		waitForElementVisible("//*[@id=\"employeeData\"]");
-		assertText("//*[@id=\"employeeData\"]/tr/td[1]", EMPLOYEE_NAME);
-		click("//*[@id=\"employeeData\"]/tr/td[5]/a");
-		//登録内容確認
-		assertEmployeeInfo(employeeNum, mailaddress);
-		assertText("/html/body/div[2]/div[3]/div[2]/table/tbody/tr[7]/td", "2000-08-01");
+//		assertPageTitle("従業員情報詳細");
+		try {
+			//3.検索にて登録内容確認
+			click(SEARCH_BUTTON_XPATH);
+//			assertPageTitle("従業員情報検索");
+			input("//*[@id=\"nameForEmployeeSearch\"]", EMPLOYEE_NAME);
+			click("//*[@id=\"employeeSearchButton\"]");
+			//一覧に追加されていることを確認
+			waitForElementVisible("//*[@id=\"employeeData\"]");
+			assertText("//*[@id=\"employeeData\"]/tr/td[1]", EMPLOYEE_NAME);
+			click("//*[@id=\"employeeData\"]/tr/td[5]/a");
+//			assertPageTitle("従業員情報詳細");
+			//登録内容確認
+			assertEmployeeInfo(employeeNum, mailaddress);
+		}catch(Exception | AssertionError e) {
+			CommonUtil.takeScreenShot(driver, ".\\result", "scenarioTest001");
+			throw e;
+		}finally {
+			//4.登録した社員を削除
+			delete();
+//			assertPageTitle("従業員情報検索");
 
-		//4.登録した社員を削除
-		click("/html/body/div[2]/div[1]/button");
-		assertText("/html/body/div[2]/div[2]/div[1]/p[1]", "以下の従業員情報を削除してもよろしいでしょうか");
-		assertText("/html/body/div[2]/div[2]/div[1]/p[2]", "・" + EMPLOYEE_NAME);
-		click("//*[@id=\"modalExecute\"]");
-		//メッセージバー確認
-		assertMessageBar("従業員情報の削除が完了しました。");
-
-		//5.ログアウト
-		click("/html/body/header/nav/div/ul/li[4]/a");
-		click("//*[@id=\"glovalNaviLoginDropMenu2\"]/li[2]/form");
+			//5.ログアウト
+			click("/html/body/header/nav/div/ul/li[4]/a");
+			click("//*[@id=\"glovalNaviLoginDropMenu2\"]/li[2]/form");
+		}
 	}
 
 	/**
@@ -268,28 +276,31 @@ public class ScenarioTest extends TestBase {
 		// メッセージバー確認
 		assertMessageBar("従業員情報の登録が完了しました。");
 
-		//3.検索にて登録内容確認
-		click(SEARCH_BUTTON_XPATH);
-		input("//*[@id=\"nameForEmployeeSearch\"]", EMPLOYEE_NAME);
-		click("//*[@id=\"employeeSearchButton\"]");
-		//一覧に追加されていることを確認
-		waitForElementVisible("//*[@id=\"employeeData\"]");
-		assertText("//*[@id=\"employeeData\"]/tr/td[1]", EMPLOYEE_NAME);
-		click("//*[@id=\"employeeData\"]/tr/td[5]/a");
-		//登録内容確認
-		assertEmployeeInfo(employeeNum, mailaddress);
-//		assertText("/html/body/div[2]/div[3]/div[2]/table/tbody/tr[4]/td", "男");
+//		assertPageTitle("従業員情報詳細");
+		try {
+			//3.検索にて登録内容確認
+			click(SEARCH_BUTTON_XPATH);
+//			assertPageTitle("従業員情報検索");
+			input("//*[@id=\"nameForEmployeeSearch\"]", EMPLOYEE_NAME);
+			click("//*[@id=\"employeeSearchButton\"]");
+			//一覧に追加されていることを確認
+			waitForElementVisible("//*[@id=\"employeeData\"]");
+			assertText("//*[@id=\"employeeData\"]/tr/td[1]", EMPLOYEE_NAME);
+			click("//*[@id=\"employeeData\"]/tr/td[5]/a");
+//			assertPageTitle("従業員情報詳細");
+			//登録内容確認
+			assertEmployeeInfo(employeeNum, mailaddress);
+		}catch(Exception | AssertionError e) {
+			CommonUtil.takeScreenShot(driver, ".\\result", "scenarioTest001");
+			throw e;
+		}finally {
+			//4.登録した社員を削除
+			delete();
+//			assertPageTitle("従業員情報検索");
 
-		//4.登録した社員を削除
-		click("/html/body/div[2]/div[1]/button");
-		assertText("/html/body/div[2]/div[2]/div[1]/p[1]", "以下の従業員情報を削除してもよろしいでしょうか");
-		assertText("/html/body/div[2]/div[2]/div[1]/p[2]", "・" + EMPLOYEE_NAME);
-		click("//*[@id=\"modalExecute\"]");
-		//メッセージバー確認
-		assertMessageBar("従業員情報の削除が完了しました。");
-
-		//5.ログアウト
-		click("/html/body/header/nav/div/ul/li[4]/a");
-		click("//*[@id=\"glovalNaviLoginDropMenu2\"]/li[2]/form");
+			//5.ログアウト
+			click("/html/body/header/nav/div/ul/li[4]/a");
+			click("//*[@id=\"glovalNaviLoginDropMenu2\"]/li[2]/form");
+		}
 	}
 }

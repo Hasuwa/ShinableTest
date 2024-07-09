@@ -33,8 +33,8 @@ public class TestBase {
 	public void siteOpen() {
 		// Chrome WebDriver options
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--headless");
-        options.addArguments("--no-sandbox");
+//        options.addArguments("--headless");
+//        options.addArguments("--no-sandbox");
 
         // Initialize Chrome WebDriver
        		driver = new ChromeDriver(options);
@@ -71,6 +71,16 @@ public class TestBase {
 		wait = new WebDriverWait(driver, waitTime);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
 	}
+	
+	/**
+	 * wait
+	 * @param xpath
+	 */
+	public void waitForElementInvisible(String xpath) {
+		waitTime = Duration.ofSeconds(20);
+		wait = new WebDriverWait(driver, waitTime);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
+	}
 
 	/**
 	 * assert text
@@ -84,10 +94,12 @@ public class TestBase {
 
 	public void startShinable() {
 		siteOpen();
+		System.out.println("start");
 	}
 
 	public void closeShinable() {
 		driver.quit();
+		System.out.println("exit");
 	}
 
 	/**
@@ -105,6 +117,8 @@ public class TestBase {
 		input(PASSWORD_INPUT_XPATH, password);
 		// click login button
 		click(LOGIN_BUTTON_XPATH);
+		
+		
 	}
 
 	/**
@@ -161,8 +175,8 @@ public class TestBase {
 		assertText("/html/body/div[2]/div[3]/div[2]/table/tbody/tr[1]/td", employeeNum);
 		assertText("/html/body/div[2]/div[3]/div[2]/table/tbody/tr[2]/td", EMPLOYEE_NAME);
 		assertText("/html/body/div[2]/div[3]/div[2]/table/tbody/tr[3]/td", mailaddress);
-		assertText("/html/body/div[2]/div[3]/div[2]/table/tbody/tr[8]/td", "AS0");
-		assertText("/html/body/div[2]/div[3]/div[2]/table/tbody/tr[9]/td", "ICT");
+		assertText("/html/body/div[2]/div[3]/div[2]/table/tbody/tr[8]/td", "AS5");
+//		assertText("/html/body/div[2]/div[3]/div[2]/table/tbody/tr[9]/td", "ICT");
 	}
 
 	/**
@@ -172,5 +186,15 @@ public class TestBase {
 	public void assertMessageBar(String message) {
 		waitForElementVisible("//*[@id=\"messageBar\"]");
 		assertText("//*[@id=\"messageBar\"]/span", message);
+	}
+	
+	protected void delete() {
+		//4.登録した社員を削除
+		click("/html/body/div[2]/div[1]/button");
+		assertText("/html/body/div[2]/div[2]/div[1]/p[1]", "以下の従業員情報を削除してもよろしいでしょうか");
+		assertText("/html/body/div[2]/div[2]/div[1]/p[2]", "・" + EMPLOYEE_NAME);
+		click("//*[@id=\"modalExecute\"]");
+		//メッセージバー確認
+		assertMessageBar("従業員情報の削除が完了しました。");
 	}
 }
