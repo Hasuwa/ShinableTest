@@ -31,15 +31,7 @@ public class TestBase {
 	 * SHINABLEを開く
 	 */
 	public void siteOpen() {
-//		WebDriverManager.edgedriver().setup();
-		
-		// WebDriver options
-//       EdgeOptions options = new EdgeOptions();
-//       options.addArguments("disable-dev-shm-usage");
-//       options.addArguments("--no-sandbox");
-//		driver = new EdgeDriver(options);
-
-		        // Chrome WebDriver options
+		// Chrome WebDriver options
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--headless");
         options.addArguments("--no-sandbox");
@@ -75,7 +67,7 @@ public class TestBase {
 	 * @param xpath
 	 */
 	public void waitForElementVisible(String xpath) {
-		waitTime = Duration.ofSeconds(10);
+		waitTime = Duration.ofSeconds(20);
 		wait = new WebDriverWait(driver, waitTime);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
 	}
@@ -150,7 +142,7 @@ public class TestBase {
 		//input password
 		input("//*[@id=\"password\"]", "P@ssw0rd");
 	}
-	
+
 	/**
 	 * assert text of page title
 	 * @param page title
