@@ -24,7 +24,9 @@ public class TestBase {
 	//Azure上にデプロイ
 	static final String SHINABLE_CLOUD_PATH = "https://shinable.azurewebsites.net/login";
 	static final String EMPLOYEE_NAME = "日本　プロ太";
-
+	// アプリのパス
+	static final String HRMS_PATH = "http://localhost:8080/login";
+	
 	// utility
 	/**
 	 * input
@@ -131,6 +133,15 @@ public class TestBase {
 	 */
 	public void assertPageTitle(String title) {
 		waitForElementTextChange("/html/body/div[2]/h1", title);
+		ExpectedConditions.titleIs(title);
+	}
+	
+	/**
+	 * assert text of page title when message bar is displayed
+	 * @param page title
+	 */
+	public void assertPageTitleDisplayedMessageBar(String title) {
+		waitForElementTextChange("/html/body/div[2]/div[1]/h1", title);
 		ExpectedConditions.titleIs(title);
 	}
 

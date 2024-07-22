@@ -1,11 +1,6 @@
 package scenario;
 
-import java.time.Duration;
-
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -15,13 +10,6 @@ import utility.CommonUtil;
 
 public class ScenarioTest extends TestBase {
 
-	WebDriver driver;
-	Duration waitTime;
-	WebDriverWait wait;
-	WebElement inputField;
-
-	// アプリのパス
-	static final String HRMS_PATH = "http://localhost:8081/login";
 	// 検索ボタンのxpath
 	static final String SEARCH_BUTTON_XPATH = "/html/body/header/nav/div/ul/li[2]/a";
 
@@ -31,7 +19,7 @@ public class ScenarioTest extends TestBase {
 	@BeforeMethod(alwaysRun = true)
 	public void before() {
 		driver = new ChromeDriver();
-		driver.get(HRMS_PATH);
+		driver.get(SHINABLE_CLOUD_PATH);
 		driver.manage().window().maximize();
 	}
 
@@ -44,7 +32,7 @@ public class ScenarioTest extends TestBase {
 		//ブラウザを閉じる
 		driver.quit();
 	}
-
+	
 	/**
 	 * 1.ログイン
 	 * 2.必須項目情報のみで社員登録
@@ -74,7 +62,7 @@ public class ScenarioTest extends TestBase {
 		click("//*[@id=\"upload\"]");
 		//メッセージバー確認
 		assertMessageBar("従業員情報の登録が完了しました。");
-		assertPageTitle("従業員情報詳細");
+		assertPageTitleDisplayedMessageBar("従業員情報詳細");
 
 		//4.登録した社員を削除
 		click("/html/body/div[2]/div[1]/button");
