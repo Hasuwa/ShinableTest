@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="suite1" parallel="Methods" thread-count="1">
+<suite name="suite1" parallel="Classes" thread-count="1">
 	<test name="test1">
 		<groups>
 			<run>
@@ -8,7 +8,7 @@
 			</run>
 		</groups>
 		<classes>
-			<class name="scenario.ScenarioTest" />
+			<class name="scenario.MorishitaTest" />
 		</classes>
 	</test>
 </suite>
