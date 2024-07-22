@@ -7,7 +7,6 @@ import java.time.Duration;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -26,24 +25,9 @@ public class TestBase {
 	static final String SHINABLE_CLOUD_PATH = "https://shinable.azurewebsites.net/login";
 	static final String EMPLOYEE_NAME = "日本　プロ太";
 
+	// utility
 	/**
-	 * SHINABLEを開く
-	 */
-	public void siteOpen() {
-		//		WebDriverManager.edgedriver().setup();
-		// WebDriver options
-		//        EdgeOptions options = new EdgeOptions();
-		//        options.addArguments("--headless");
-		//        options.addArguments("--no-sandbox");
-		//		driver = new EdgeDriver(options);
-
-		driver = new ChromeDriver();
-		driver.get(SHINABLE_DEPLOYED_PATH);
-		driver.manage().window().maximize();
-	}
-
-	/**
-	 * 入力
+	 * input
 	 * @param xpath
 	 * @param data
 	 */
@@ -53,7 +37,7 @@ public class TestBase {
 	}
 
 	/**
-	 * クリック
+	 * click
 	 * @param xpath
 	 */
 	public void click(String xpath) {
@@ -72,6 +56,16 @@ public class TestBase {
 	}
 
 	/**
+	 * wait for expected text
+	 * @param xpath
+	 */
+	public void waitForElementTextChange(String xpath, String text) {
+		waitTime = Duration.ofSeconds(20);
+		wait = new WebDriverWait(driver, waitTime);
+		wait.until(ExpectedConditions.textToBePresentInElement(driver.findElement(By.xpath(xpath)), text));
+	}
+
+	/**
 	 * assert text
 	 * @param xpath
 	 * @param name
@@ -81,16 +75,9 @@ public class TestBase {
 		assertEquals(driver.findElement(By.xpath(xpath)).getText(), text);
 	}
 
-	public void startShinable() {
-		siteOpen();
-	}
-
-	public void closeShinable() {
-		driver.quit();
-	}
-
+	// method
 	/**
-	 * login SHINABLE
+	 * login
 	 * @param mailAddress
 	 * @param password
 	 */
@@ -118,17 +105,14 @@ public class TestBase {
 		input("//*[@id=\"fullName\"]", EMPLOYEE_NAME);
 		// input mailaddress
 		input("//*[@id=\"mailAddress\"]", mailaddress);
-
 		// select rank
 		click("/html/body/div[2]/div/form/div[8]/div/div/input");
 		click("//*[@class=\"dropdown-content select-dropdown\"]/li[2]");
-
 		// select group
 		click("//*[@id=\"open\"]");
-		//dialog
+		// dialog
 		click("//*[@id=\"node0\"]");
 		click("//*[@id=\"select\"]");
-
 		//入力出来ていない時があったのでリトライを入れる
 		if (driver.findElement(By.xpath("//*[@id=\"organizationName\"]")).getText().equals(null)) {
 			// select group
@@ -137,7 +121,6 @@ public class TestBase {
 			click("//*[@id=\"node0\"]");
 			click("//*[@id=\"select\"]");
 		}
-
 		//input password
 		input("//*[@id=\"password\"]", "P@ssw0rd");
 	}
@@ -147,21 +130,8 @@ public class TestBase {
 	 * @param page title
 	 */
 	public void assertPageTitle(String title) {
-		assertText("/html/body/div[2]/h1", title);
+		waitForElementTextChange("/html/body/div[2]/h1", title);
 		ExpectedConditions.titleIs(title);
-	}
-
-	/**
-	 * assert added employee info
-	 * @param employeeNum
-	 * @param mailaddress
-	 */
-	public void assertEmployeeInfo(String employeeNum, String mailaddress) {
-		assertText("/html/body/div[2]/div[3]/div[2]/table/tbody/tr[1]/td", employeeNum);
-		assertText("/html/body/div[2]/div[3]/div[2]/table/tbody/tr[2]/td", EMPLOYEE_NAME);
-		assertText("/html/body/div[2]/div[3]/div[2]/table/tbody/tr[3]/td", mailaddress);
-		assertText("/html/body/div[2]/div[3]/div[2]/table/tbody/tr[8]/td", "AS0");
-		assertText("/html/body/div[2]/div[3]/div[2]/table/tbody/tr[9]/td", "ICT");
 	}
 
 	/**
