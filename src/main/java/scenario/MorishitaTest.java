@@ -11,7 +11,7 @@ import utility.CommonUtil;
 public class MorishitaTest extends MorishitaTestBase {
 
 	// アプリのパス
-	static final String HRMS_PATH = "https://shinable.azurewebsites.net/login";
+	static final String HRMS_PATH = "http://localhost:8081/login";
 	// 検索ボタンのxpath
 	static final String SEARCH_BUTTON_XPATH = "/html/body/header/nav/div/ul/li[2]/a";
 
