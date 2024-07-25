@@ -13,7 +13,6 @@ public class TemplateTest {
 	/**
 	 * Chromeでアプリを開く
 	 */
-	@BeforeMethod(alwaysRun = true)
 	public void before() {
 
 	}
@@ -22,7 +21,6 @@ public class TemplateTest {
 	 * 
 	 * @param result
 	 */
-	@AfterMethod(alwaysRun = true)
 	public void after(ITestResult result) {
 		//failしたらスクショ
 
@@ -36,7 +34,6 @@ public class TemplateTest {
 	 * 3.登録した社員を削除
 	 * 4.ログアウト
 	 */
-	@Test(groups = "scenario")
 	public void tempTest001() {
 		//1.ログイン
 		//1-1 メールアドレス入力
